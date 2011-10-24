@@ -1,0 +1,178 @@
+/**
+ *
+ *
+ */
+description = "SkyNet"
+group = 'com.ign.hackweek.skynet'
+version = '1.0-SNAPSHOT'
+
+/** project variables  */
+scalaVersion = "2.9.1"
+liftVersion = '2.4-M4'
+slf4jVersion = '1.6.2'
+
+defaultTasks 'assemble'
+
+/**
+ * Libraries Map
+ */
+libraries = [
+        dom4j: 'dom4j:dom4j:1.6.1',
+        guava: 'com.google.guava:guava:r09',
+        groovy: 'org.codehaus.groovy:groovy-all:1.8.3',
+        jcip: 'net.jcip:jcip-annotations:1.0',
+        junit: 'junit:junit:4.8.2',
+        xmlunit: 'xmlunit:xmlunit:1.3',
+]
+
+// Specs
+libraries.servletApi = "javax.servlet:servlet-api:2.5"
+
+// Logging
+libraries.slf4jApi = "org.slf4j:slf4j-api:$slf4jVersion"
+libraries.jcl_to_slf4j = dependencies.module("org.slf4j:jcl-over-slf4j:$slf4jVersion") {
+    dependency libraries.slf4jApi
+}
+libraries.log4j_to_slf4j = dependencies.module("org.slf4j:log4j-over-slf4j:$slf4jVersion") {
+    dependency libraries.slf4jApi
+}
+libraries.logbackCore = 'ch.qos.logback:logback-core:0.9.29'
+libraries.logbackClassic = dependencies.module('ch.qos.logback:logback-classic:0.9.29') {
+    dependency libraries.logbackCore
+    dependency libraries.slf4jApi
+}
+
+
+libraries.slf4jTools = [
+        //"org.clapper:grizzled-slf4j_$scalaVersion:0.6.6"
+]
+
+
+//Scala Tools
+libraries.scalaTools = [
+        "org.scala-lang:scala-compiler:$scalaVersion",
+        "org.scala-lang:scala-library:$scalaVersion",
+]
+
+// Scala Lift
+libraries.liftweb = [
+        "net.liftweb:lift-webkit_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-mapper_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-json_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-util_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-common_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-mongodb_$scalaVersion:$liftVersion",
+        "net.liftweb:lift-mongodb-record_$scalaVersion:$liftVersion",
+        "org.mongodb:mongo-java-driver:2.6.5",
+]
+
+libraries.liftTools = [
+       "com.foursquare:rogue_$scalaVersion:1.0.27"
+]
+
+// Performance Tools
+libraries.perf = ['org.perf4j:perf4j:0.9.15',]
+
+// Tests
+libraries.scalaTest = [
+        "org.scalatest:scalatest_$scalaVersion:1.6.1",
+        "org.scala-tools.testing:specs_$scalaVersion:1.6.9"
+]
+
+//
+//libraries.jmock = [
+//        'org.jmock:jmock:2.5.1',
+//        'org.hamcrest:hamcrest-core:1.1',
+//        'org.hamcrest:hamcrest-library:1.1',
+//        'org.jmock:jmock-junit4:2.5.1',
+//        'org.jmock:jmock-legacy:2.5.1',
+//        'org.objenesis:objenesis:1.2',
+//        'cglib:cglib-nodep:2.2'
+//]
+
+
+allprojects { project ->
+
+    apply plugin: 'maven'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'project-report'
+
+
+    group = this.group
+    version = this.version
+
+    plugins.withType(JavaPlugin) {
+        sourceCompatibility = 1.6
+        targetCompatibility = 1.6
+    }
+
+    repositories {
+        mavenCentral()
+        mavenRepo name: "Sonatype OSS", urls: ["http://oss.sonatype.org/content/repositories/releases/"]
+        mavenRepo name: "Sonatype OSS Snapshots", urls: ["http://oss.sonatype.org/content/repositories/snapshots/"]
+        mavenRepo name: "Sun Jersey", urls: ["http://download.java.net/maven/2/"]
+        mavenRepo name: "SpyMemcached", urls: ["http://files.couchbase.com/maven2/"]
+
+        mavenRepo name: "Scala Tools Release Repository", urls: ["http://scala-tools.org/repo-releases/"]
+        mavenRepo name: "Scala Tools Snapshot Repository", urls: ["http://scala-tools.org/repo-snapshots/"]
+        mavenRepo name: "Novus Release Repository", urls: ["http://repo.novus.com/releases/"]
+        mavenRepo name: "Novus Snapshots Repository", urls: ["http://repo.novus.com/snapshots/"]
+        mavenRepo name: "Typesafe Repo", urls: ["http://repo.typesafe.com/typesafe/releases/"]
+        mavenRepo name: "Scala-Tools Maven2 Repository", urls: ["http://scala-tools.org/repo-releases/"]
+    }
+
+    //apply from: "$rootDir/gradle/conventions-dsl.gradle"
+}
+
+subprojects {
+
+    apply plugin: 'groovy'
+    apply plugin: 'scala'
+
+    manifest.mainAttributes(
+            "Built-By": System.properties['user.name'],
+            "Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
+            "Implementation-Title": "Sites Services",
+            "Implementation-Version": this.version,
+            "Implementation-Vendor": this.group)
+
+    dependencies {
+
+        compile libraries.slf4jApi
+        compile libraries.logbackClassic
+        compile libraries.slf4jTools
+
+        compile libraries.jcip
+        compile libraries.guava
+        compile libraries.perf
+
+        scalaTools libraries.scalaTools
+
+
+        runtime libraries.log4j_to_slf4j
+        runtime libraries.jcl_to_slf4j
+
+        testCompile libraries.junit
+        testCompile libraries.scalaTest
+    }
+
+    /*
+    compileScala {
+        scalaCompileOptions.useCompileDaemon = true
+        // optionally specify host and port of the daemon:
+        //scalaCompileOptions.daemonServer = "localhost:4243"
+    }
+    */
+
+}
+
+apply {
+    from 'gradle/docs.gradle' // tasks for building the documentation (e.g. user guide, javadocs)
+    from 'gradle/assemble.gradle' // tasks for creating an installation or distribution
+    from 'gradle/findbugs.gradle'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-3'
+}

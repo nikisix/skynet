@@ -1,0 +1,6 @@
+description = ""
+
+dependencies {
+    //compile libraries.liftweb
+    //compile libraries.liftTools
+}
