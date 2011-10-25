@@ -10,7 +10,7 @@ object Config {
 		}
 	val streams = environment match {
 			case _ => Map(
-				"SF_Keys" -> new FilterQuery(0,null, 
+				"SF_Keys" -> new FilterQuery(0,null,
 					Array("play","game"), 
 					Array(Array(-122.75,36.8),Array(-121.75,37.8))),
 				"NY_Keys" -> new FilterQuery(0,null,
