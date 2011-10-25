@@ -2,7 +2,7 @@ description = ""
 
 dependencies {
 
-    compile "org.twitter4j:twitter4j:2.1.12"
+    compile "org.twitter4j:twitter4j:2.2.5"
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 
 }
