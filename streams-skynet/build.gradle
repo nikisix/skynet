@@ -7,8 +7,8 @@ dependencies {
 
 }
 
-task(run, dependsOn: 'classes', type: JavaExec) {
-    main = "com.ign.hackweek.skynet.$mainClass"
+task(run, dependsOn: 'classes', type: JavaExec ) {
+    main = "com.ign.hackweek.skynet.${mainClass}"
     classpath = sourceSets.main.runtimeClasspath
     args ''
     //systemProperty 'simple.message', 'Hello '
