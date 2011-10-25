@@ -1,4 +1,4 @@
-package com.ign.hackweek.skynet.stream
+package com.ign.hackweek.skynet.streams
 
 import twitter4j.{TwitterStream,TwitterStreamFactory}
 
