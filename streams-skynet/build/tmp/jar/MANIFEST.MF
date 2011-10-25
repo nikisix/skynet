@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Built-By: bpalacio
-Created-By: 20.1-b02-383 (Apple Inc.)
-Implementation-Title: Sites Services
-Implementation-Version: 1.0-SNAPSHOT
-Implementation-Vendor: com.ign.hackweek.skynet
-

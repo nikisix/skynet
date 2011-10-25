@@ -2,7 +2,7 @@ package com.ign.hackweek.skynet.stream
 
 object Config {
 	val environment = System.getProperty("environment","dev")
-	val stream = Map(
+	val streams = Map(
 			"basic" -> Map(
 				"uri" -> "xxx",
 				"params" -> "yyy",

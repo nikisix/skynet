@@ -1,6 +1,8 @@
 description = ""
 
 dependencies {
-    //compile libraries.liftweb
-    //compile libraries.liftTools
+
+    compile "org.twitter4j:twitter4j:2.1.12"
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+
 }

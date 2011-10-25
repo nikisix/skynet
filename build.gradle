@@ -44,7 +44,7 @@ libraries.logbackClassic = dependencies.module('ch.qos.logback:logback-classic:0
 
 
 libraries.slf4jTools = [
-        //"org.clapper:grizzled-slf4j_$scalaVersion:0.6.6"
+        "org.clapper:grizzled-slf4j_$scalaVersion:0.6.6"
 ]
 
 
@@ -121,8 +121,6 @@ allprojects { project ->
         mavenRepo name: "Typesafe Repo", urls: ["http://repo.typesafe.com/typesafe/releases/"]
         mavenRepo name: "Scala-Tools Maven2 Repository", urls: ["http://scala-tools.org/repo-releases/"]
     }
-
-    //apply from: "$rootDir/gradle/conventions-dsl.gradle"
 }
 
 subprojects {
@@ -148,7 +146,6 @@ subprojects {
         compile libraries.perf
 
         scalaTools libraries.scalaTools
-
 
         runtime libraries.log4j_to_slf4j
         runtime libraries.jcl_to_slf4j
