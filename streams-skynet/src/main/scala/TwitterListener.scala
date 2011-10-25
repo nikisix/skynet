@@ -1,7 +1,7 @@
-package com.ign.hackweek.skynet.stream
+package com.ign.hackweek.skynet.streams
 
 import twitter4j.{Status,StatusListener}
 
 object TwitterListener extends StatusListener {
-	def onStatus(status: Status) = println(status.getUser.getName + " : " + status.getText)
+	override def onStatus(status: Status) = println(status.getUser.getName + " : " + status.getText)
 }
