@@ -4,58 +4,50 @@ import java.util.concurrent.locks.ReentrantLock
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import net.liftweb.common.Loggable
-import net.liftweb.actor.LiftActor
-import net.liftweb.util.Schedule
-import net.liftweb.util.Helpers.TimeSpan
 import twitter4j.QueryResult
 
+import com.ign.hackweek.skynet.scheduler._
 import com.ign.hackweek.skynet.utils.TwitterSearch
 import com.ign.hackweek.skynet.model.SearchFeed
 
-class Scheduler extends LiftActor with TwitterSearch {
+class SearchJob(name: String, ms: Long) extends Job {
   val counter = new AtomicInteger(0)
 
-  def status = Map("count" -> this.counter.get)
+  def status = Map("name" -> this.name, "tick" -> this.ms, "counter" -> counter.get)
 
-  protected def messageHandler = {
-    case 'process => {
-      counter.incrementAndGet
-      this.search("source:twitter4j #skyrim")
-      //Do process of each message here
-    }
+  def execute() = {
+    counter.incrementAndGet
   }
 }
 
-object SearchService extends Loggable {
-  private val scheduler = new Scheduler
+object SearchService extends Loggable with Scheduler {
   private val lock = new ReentrantLock
-  private var started = false
-  private var feeds = List[SearchFeed]()
+  private var jobs = List[Job]()
 
-  def start = {
+  def startJobs = {
     this.lock.tryLock(200, TimeUnit.MILLISECONDS)
     try {
-      this._stop
-      this.feeds = SearchFeed.findAll
-      this._start
+      this._stopJobs
+      this.jobs = List(new SearchJob("1",1000), new SearchJob("2",2000))
+      this._startJobs
     } finally {
       this.lock.unlock()
     }
     this.status
   }
 
-  def stop = {
+  def stopJobs = {
     this.lock.tryLock(200, TimeUnit.MILLISECONDS)
     try {
-      this._stop
-      this.feeds = List[SearchFeed]()
+      this._stopJobs
+      this.jobs = List[Job]()
     } finally {
       this.lock.unlock()
     }
     this.status
   }
 
-  def newFeed = {
+  def registerFeed = {
     if (this.started) {
       //this.feeds = SearchFeed()
     }
@@ -63,12 +55,11 @@ object SearchService extends Loggable {
   }
 
   def status = {
-    val statusText = if (this.started) "Started" else "Stopped"
-    Map("status" -> statusText, "feeds" -> this.feeds.map(_.name).toList, "processed" -> this.scheduler.status)
+    val statusText = if (this.) "Started" else "Stopped"
+    Map("status" -> statusText, "jobs" -> this.jobs.map(_.status).toList)
   }
 
-  private def _start = {
-    this.started = true
+  private def _startJobs = {
     Schedule.restart
     Schedule.schedule(this.scheduler, 'process, TimeSpan(1))
   }

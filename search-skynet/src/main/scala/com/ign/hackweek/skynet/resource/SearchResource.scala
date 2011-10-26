@@ -8,11 +8,11 @@ object SearchResource extends RestHelper {
 
   serve("v1" / "search"   prefix {
 
-    case "start" :: Nil JsonGet _ => Extraction.decompose( SearchService.start )
+    case "start" :: Nil JsonGet _ => Extraction.decompose( SearchService.startJobs )
 
-    case "stop" :: Nil JsonGet _ => Extraction.decompose( SearchService.stop )
+    case "stop" :: Nil JsonGet _ => Extraction.decompose( SearchService.stopJobs )
 
-    case "new" :: Nil JsonGet _ => Extraction.decompose( SearchService.newFeed )
+    case "register" :: Nil JsonPost _ => Extraction.decompose( SearchService.registerFeed )
 
     case "status" :: Nil JsonGet _ => Extraction.decompose( SearchService.status )
 

@@ -14,12 +14,12 @@ class SearchFeedRecord private() extends MongoRecord[SearchFeedRecord] with Obje
 
   object query extends StringField(this, 1024)
 
-  object master extends BooleanField(this, true)
+  object parent extends StringField(this, 64)
 
   object enabled extends BooleanField(this, true)
 
   def toModel = {
-    SearchFeed(this.name.value, this.query.value, this.master.value, this.enabled.value)
+    SearchFeed(this.name.value, this.query.value, this.parent.value, this.enabled.value)
   }
 }
 
