@@ -13,6 +13,8 @@ trait Scheduler {
 
   val defaultGroupName = "default"
 
+  def isRunning() = !this.stopped
+
   def start() {
     if (!thread.isAlive) {
       stopped = false
@@ -195,6 +197,8 @@ case class CronJobSchedule(
   daysOfWeek: List[Int],
   year: Option[Int]) extends JobSchedule
 {
+  import CronJobSchedule._
+
   def firstRun(currentTime: Long) = nextRun(currentTime).get
 
   def nextRun(currentTime: Long): Option[Long] = {
