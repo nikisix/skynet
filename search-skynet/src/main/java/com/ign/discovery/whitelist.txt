@@ -1,0 +1,77 @@
+"X360" "Batman: Arkham City" "Batman: Arkham Asylum 2" "PS3" "Dark Souls" "Project Dark" 
+"PC" "The Elder Scrolls V: Skyrim" "Elder Scrolls V: Sky Rim" "Wii-u" "Star Wars: The Old 
+Republic" "Uncharted 3: Drake's Deception" "Battlefield 3" "Batman: Arkham Asylum" "PS2" 
+"Grand Theft Auto III" "Grand Theft Auto 3" "Grand Theft Auto: Liberty City" "Uncharted 2: 
+Among Thieves" "Grand Theft Auto IV" "Grand Theft Auto 4" "GTA 4" "Uncharted: Drake's 
+Fortune" "Infamous 2" "Gears of War 3" "Demon's Souls" "Demon Souls" "Demons Souls" "God of 
+War III" "Call of Duty: Modern Warfare 3" "Call Of Duty: MW3" "CoD: MW3" "LittleBigPlanet 2" 
+"Little Big Planet 2" "LBP 2" "Wii" "The Legend of Zelda: Skyward Sword" "The Legend of 
+Zelda Wii 2" "The Legend of Zelda: The Skyward Sword" "WWE SmackDown! Here Comes the Pain" 
+"WWE SmackDown 5: Here Comes the Pain" "Kirby's Return to Dream Land" "Kirby's Adventure 
+Wii" "Kirby's Return to Dreamland" "WWE SmackDown! Shut Your Mouth" "WWE SmackDown 4: Shut 
+Your Mouth" "Infamous" "Assassin's Creed II" "Assassins Creed II" "Vita" "Ruin" "Escape 
+Plan" "Sound Shapes" "World of Warcraft: Mists of Pandaria" "World of Warcraft: Expansion 
+#4: World of Warcraft: Mists of Pandaria"
+"Rage" "id Tech 5 Project" "Deus Ex: Human Revolution" "Deus Ex 3: Human Revolution" "Metal 
+Gear Solid 4: Guns of the Patriots " "MGS4: Guns of the Patriots " "Red Dead Redemption" 
+"Red Dead Revolver 2: Redemption" "Rockstar Old West PS3 Project [working codename]" 
+"Rocksmith" "Fallout: New Vegas" "Halo: Reach" "Catherine" "Cathy" "Fallout 3" "WWE '12" 
+"WWE 2012" "Heavy Rain" "Heavy Rain: The Origami Killer" "Heavy Rain" "Mass Effect 2" "Mass 
+Effect: Chapter 2" "Ratchet & Clank Future: A Crack in Time" "Ratchet and Clank Future 2: A 
+Crack in Time" "Dead Space 2" "Dead Space II" "Portal 2" "Half-Life: Portal 2" "Borderlands" 
+"Border Lands" "Dead Space 2" "Dead Space 2 & Dead Space Extraction" "NBA 2K12" "2K Sports 
+NBA 2011" "BioShock" "Bio Shock" "Red Dead Redemption" "Resistance: Fall of Man" "I-8" 
+"Vanquish" "Valkyria Chronicles" "Valkyrie Of The Battlefield: Gallian Chronicles" "Battle 
+Field Valkyrie: Gallian Chronicles" "Burnout Paradise" "Burnout 5" "StarCraft II: Heart of 
+the Swarm" "StarCraft II Zerg: Heart of the Swarm" "StarCraft 2: Heart of the Swarm -- The 
+Zerg Campaign" "Batman: Arkham City" "Batman: Arkham Asylum 2" "3DS" "Mario Kart 7" "Mario 
+Kart 3DS" "Super Mario Kart 7" "L.A. Noire" "LA Noir" "Gears of War 2" "Ratchet & Clank: All 
+4 One" "Ratchet and Clank Future: All 4 One" "Ratchet and Clank: All Four One" "GCN" "Kirby 
+Adventure GCN" "The Legend of Zelda: Twilight Princess" "The Legend of Zelda" "Legend of 
+Zelda Twilight Princess" "NDS" "Mario Kart DS" "Fable II" "Project Ego 2" "Forza Motorsport 
+4" "Forza 4" "Crysis 2" "Star Wars: The Old Republic" "Call of Duty 4: Modern Warfare" "COD 
+4" "Call of Duty: Modern Warfare" "Battlefield: Bad Company 2" "Dead Island" "The Witcher 2: 
+Assassins of Kings" "Diablo III" "Diablo 3" "Forza Motorsport 3" "WipEout 2048" "WipEout 
+Vita" "Total War: Shogun 2" "Shogun II: Total War" "Dead Rising" "Mass Effect 3" "Mass 
+Effect: Chapter 3" "Saints Row: The Third" "Saint's Row 3" "Saints Row: The 3rd" "The Elder 
+Scrolls V: Skyrim" "Elder Scrolls V: Sky Rim Collector's Edition" "Left 4 Dead 2" "Left for 
+Dead 2" "The Orange Box" "Orange Box" "Hitman: Blood Money" "Hitman 4" "Hitman Blood Money" 
+"Dragon Age II" "Crackdown" "Crack Down" "Sid Meier's Civilization Revolution" "Sid Meier's 
+Civilization Revolution " "Tom Clancy's Rainbow Six: Vegas" "Tom Clancy's Rainbow 6: Vegas" 
+"Tom Clancy's Rainbow Six: Las Vegas" "Viva Pinata 2: Trouble in Paradise" "FIFA Soccer 11" 
+"EA Sports FIFA 2011" "FIFA Soccer 2011 / FIFA Football 2011" "ModNation Racers: Road Trip" 
+"Mod Nation Racers: Road Trip" "PayDay: The Heist" "Pay Day: The Heist" "Mac" "Halo: Combat 
+Evolved Anniversary" "Halo Anniversary" "Rage" "Grand Theft Auto 4" "GTA 4" "Mass Effect 3" 
+"iPhone" "Angry Birds" "Hustle Kings Vita" "Chaos Rings" "Drop7" "Drop 7" "Drop Seven" 
+"Battlefield 3" "iPad" "Osmos" "Ultimate Marvel Vs. Capcom 3" "Marvel versus Capcom 3: Fate 
+of Two Worlds Ultimate" "Marvel Vs. Capcom 3 Ultimate" "Peggle" "Pix'n Love Rush" 
+"Squareball" "Flight Control" "Uncharted: Golden Abyss" "Uncharted Portable" "Uncharted 
+Vita" "Resistance: Burning Skies" "Gravity Rush" "Gravity" "New Super Mario Bros." "New 
+Super Mario Brothers" "Super Mario DS" "Soulcalibur V" "Soul Calibur V" "Mario Kart Wii" 
+"Mario Kart" "Pokemon Diamond Version" "Pokemon Diamond & Pearl -- Diamond Version" 
+"Resistance 3" "Resistance: Fall of Man 3" "Mario Kart Super Circuit" "GBA" "The Legend of 
+Zelda: Phantom Hourglass" "The Legend of Zelda DS" "Pokemon Pearl Version" "Pokemon Diamond 
+& Pearl -- Pearl Version" "Pokemon Platinum Version" "Pokemon Diamond & Pearl & Platinum -- 
+Platinum Version" "Assassin's Creed: Brotherhood" "Assassin's Creed II: Brotherhood" 
+"Assassin's Creed II Episodes Project" "Sonic Rush" "Sonic the Hedgehog: Sonic Rush" 
+"Infinity Blade" "Project Sword" "Halo 3: ODST" "Halo: ODST -- Orbital Drop Shock Troopers" 
+"Halo 3: Recon" "Super Mario 3D Land" "Super Mario 3D" "Super Mario Land 3D" "Super Stardust 
+Delta" "Batman Vengeance" "Batman: Rise of Sin Tzu" "N64" "Batman Beyond: Return of the 
+Joker" "Xbox" "Batman: Dark Tomorrow" "PS" "Batman: Gotham City Racer" "Batman: Rise of Sin 
+Tzu " "GBC" "Batman: Chaos in Gotham" "Batman: Total Chaos in Gotham City" "Animal Crossing: 
+Wild World" "Animal Crossing DS" "Animal Crossing WW" "Final Fantasy Tactics A2: Grimoire of 
+the Rift" "Ivalice Alliance ~ Final Fantasy Tactics A2 Fuuketsu no Grimoire" "Final Fantasy 
+Tactics A2: The Sealed Grimoire" "Castlevania: Dawn of Sorrow" "Castlevania DS" "Castlevania 
+Dawn of Sorrow" "Uncharted 2: Among Thieves" "The World Ends with You" "Subarashiki: It's a 
+Wonderful World" "Cut the Rope" "Grand Theft Auto: Chinatown Wars" "Metroid Prime: Hunters" 
+"Metroid Prime Hunters" "God of War" "Dark Odyssey" "Uncharted 2: Among Thieves" 
+"Nintendogs: Dachshund & Friends" "Puppy Times" "Nintendogs: Lab & Friends" "Nintendogs: 
+Laborador Retriever & Friends" "Groove Coaster" "Nintendogs: Chihuahua & Friends" "Advance 
+Wars: Dual Strike" "DS Wars" "Advance Wars Dual Strike" "Nintendogs: Dalmatian & Friends" 
+"Puzzle Quest: Challenge of the Warlords" "Puzzle Quest: Warlords" "Nintendogs: Best Friends 
+Version" "Nintendogs: Holiday Edition" "Ninja Gaiden: Dragon Sword" "Kirby Canvas Curse" 
+"Quick-Draw Kirby" "Kirby: Cursed Canvas" "Elite Beat Agents" "Elite Beat Rangers" "Space 
+Invaders Extreme" "Guitar Hero On Tour" "Guitar Hero DS" "Guitar Hero: On Tour" "Picross DS" 
+"Tony Hawk's American Sk8land" "Tony Hawk's Underground 3 (THUG 3) (Tony Hawk's American 
+Wasteland DS)" "T.H.U.G. -- Tony Hawk's Pro Skater 7" "N+" "N Plus" "N-Game Plus" "Meteos" 
+"Tetris DS" "Planet Puzzle League" "Tetris Attack" "Grand Theft Auto"
