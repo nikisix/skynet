@@ -6,13 +6,13 @@ import com.ign.hackweek.skynet.service.SearchService
 
 object SearchResource extends RestHelper {
 
-  serve("v1" / "search"   prefix {
+  serve("v1" / "service" prefix {
 
     case "start" :: Nil JsonGet _ => Extraction.decompose( SearchService.startJobs )
 
     case "stop" :: Nil JsonGet _ => Extraction.decompose( SearchService.stopJobs )
 
-    case "register" :: Nil JsonPost _ => Extraction.decompose( SearchService.registerFeed )
+    case "register" :: Nil JsonPut json -> _ => Extraction.decompose( SearchService.registerFeed(json) )
 
     case "status" :: Nil JsonGet _ => Extraction.decompose( SearchService.status )
 

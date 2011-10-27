@@ -25,4 +25,13 @@ class SearchFeedRecord private() extends MongoRecord[SearchFeedRecord] with Obje
 
 object SearchFeedRecord extends SearchFeedRecord with MongoMetaRecord[SearchFeedRecord] with Loggable {
   def findByName(name: String): Option[SearchFeedRecord] = SearchFeedRecord.find(("name" -> name))
+
+  def unapply(feed: SearchFeed): SearchFeedRecord = {
+    val record = SearchFeedRecord.createRecord
+    record name feed.name
+    record query feed.query
+    record parent feed.parent
+    record enabled feed.enabled
+    record
+  }
 }

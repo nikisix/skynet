@@ -2,7 +2,9 @@ package com.ign.hackweek.skynet.model
 
 import com.ign.hackweek.skynet.record.SearchFeedRecord
 
-case class SearchFeed(name: String, query: String, parent: String, enabled: Boolean)
+case class SearchFeed(name: String, query: String, parent: String, enabled: Boolean) {
+  def toRecord: SearchFeedRecord = SearchFeedRecord.unapply(this)
+}
 
 object SearchFeed {
   def findByName(name: String): Option[SearchFeed] = {

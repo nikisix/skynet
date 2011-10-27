@@ -6,27 +6,51 @@ import com.ign.hackweek.skynet.model.SearchFeed
 import java.text.SimpleDateFormat
 import java.util.{Date, Calendar}
 import twitter4j.{Tweet, QueryResult}
+import net.liftweb.common.Loggable
+import collection.mutable.ListBuffer
 
-class Tweetminator(queue: TweetQueue) extends SearchJob("Tweetminator", 60000) with TwitterSearch {
+class Tweetminator(name: String, seconds: Int, queue: TweetMessageQueue) extends SearchJob(name, seconds)
+  with TwitterSearch with Loggable {
 
-  def drop(from: Date, to: Date, result: QueryResult): List[Tweet] = {
-    var tweets = List[Tweet]()
-    for(t <- result.getTweets.toArray ) {
+  var currentStatus = "Idle"
+  var lastFeedCount = 0
+
+  override def status = {
+    var parentStatus = super.status
+    parentStatus += "lastFeedCount" -> lastFeedCount
+    parentStatus += "status" -> currentStatus
+    parentStatus
+  }
+
+  def drop(timeFrame: Int, result: QueryResult): List[Tweet] = {
+    val tweets = new ListBuffer[Tweet]()
+    val preTweets = result.getTweets.toArray
+    for(t <- preTweets) {
       val tweet = t.asInstanceOf[Tweet]
-      if (tweet.getCreatedAt.compareTo(from) >= 0 && tweet.getCreatedAt.compareTo(to) < 0)
-        tweets :+ tweet
+      val created = ((tweet.getCreatedAt.getHours * 60) + tweet.getCreatedAt.getMinutes) * 60
+      logger.debug("Tweet: " + created.toString + " / " + timeFrame.toString + " v " + (timeFrame+seconds).toString)
+      if (created >= timeFrame && created < timeFrame+seconds) {
+        tweets += tweet
+      }
     }
-    tweets
+    tweets.toList
   }
 
   def execute() = {
+    currentStatus = "Finding feeds..."
     val feeds = SearchFeed.findAll
-    val format = new SimpleDateFormat("HHmm");
+    lastFeedCount = feeds.size
     val fromTime = Calendar.getInstance
-    val timeFrame = format.format(fromTime.getTime)
-    fromTime.add(Calendar.MINUTE,1)
-    val toTime = fromTime
-    feeds.foreach(feed =>
-      queue.add(feed.name + "_" + timeFrame, this.drop(fromTime.getTime, toTime.getTime, search(feed.query))))
+    fromTime.add(Calendar.MINUTE,-10)
+    val timeFrame = ((fromTime.getTime.getHours * 60) + fromTime.getTime.getMinutes) * 60
+    for (feed <- feeds) {
+      currentStatus = "Searching feed %s...".format(feed.name)
+      val preTweets = search(feed.query)
+      if (preTweets != null) {
+        val listValue = this.drop(timeFrame, preTweets)
+        queue.add(feed.name, (timeFrame, seconds), listValue)
+      }
+    }
+    currentStatus = "Idle"
   }
 }
