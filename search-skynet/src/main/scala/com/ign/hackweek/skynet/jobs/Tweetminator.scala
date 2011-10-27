@@ -8,7 +8,7 @@ import twitter4j.{Tweet, QueryResult}
 import net.liftweb.common.Loggable
 import collection.mutable.ListBuffer
 
-class Tweetminator(name: String, seconds: Int, queue: TweetMessageQueue) extends SearchJob(name, seconds)
+class Tweetminator(name: String, seconds: Int, delay:Int, queue: TweetMessageQueue) extends SearchJob(name, seconds)
   with TwitterSearch with Loggable {
 
   var currentStatus = "Idle"
@@ -40,7 +40,7 @@ class Tweetminator(name: String, seconds: Int, queue: TweetMessageQueue) extends
     val feeds = SearchFeed.findAll
     lastFeedCount = feeds.size
     val fromTime = Calendar.getInstance
-    fromTime.add(Calendar.MINUTE,-10)
+    fromTime.add(Calendar.MINUTE,delay)
     val timeFrame = ((fromTime.getTime.getHours * 60) + fromTime.getTime.getMinutes) * 60
     for (feed <- feeds) {
       currentStatus = "Searching feed %s...".format(feed.name)

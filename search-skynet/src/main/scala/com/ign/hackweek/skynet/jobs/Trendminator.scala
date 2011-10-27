@@ -4,8 +4,13 @@ import com.ign.hackweek.skynet.service.SearchJob
 import com.ign.hackweek.skynet.utils.TwitterSearch
 import java.util.Calendar
 import net.liftweb.common.Loggable
+import twitter4j.{HashtagEntity, Tweet}
+import collection.mutable.{HashMap,ListBuffer}
 
-class Trendminator(name: String, seconds: Int, top: Int, tweetQueue: TweetMessageQueue, trendQueue: TrendMessageQueue) extends SearchJob(name, seconds)
+import com.mongodb.WriteConcern
+import com.ign.hackweek.skynet.record.{TweetTag, TweetObject, Trend, TrendRecord}
+
+class Trendminator(name: String, seconds: Int, delay: Int, tweetQueue: TweetMessageQueue) extends SearchJob(name, seconds)
   with TwitterSearch with Loggable {
 
   var lastTimeFrame = 0
@@ -18,20 +23,48 @@ class Trendminator(name: String, seconds: Int, top: Int, tweetQueue: TweetMessag
     parentStatus
   }
 
+  def trendByTags(tweets: List[Tweet]): List[TweetTag] = {
+    var tags = new HashMap[String, Int]()
+    tweets.foreach(_.getHashtagEntities.foreach(tag => {
+      val tagText = tag.getText.toLowerCase
+      if (!tags.contains(tagText))
+        tags += tagText -> 1
+      else
+        tags(tagText) = tags(tagText) + 1
+    }))
+    var listTags = new ListBuffer[TweetTag]()
+    for (tag <- tags) {
+      val newTag = TweetTag.createRecord.name(tag._1).count(tag._2)
+      listTags += newTag
+    }
+    listTags.toList
+  }
+
   def execute() = {
     val fromTime = Calendar.getInstance
-    fromTime.add(Calendar.MINUTE,-12)
+    fromTime.add(Calendar.MINUTE,delay)
     val timeFrame = ((fromTime.getTime.getHours * 60) + fromTime.getTime.getMinutes) * 60
-    currentStatus = "Moving top %d on tf %d...".format(top,timeFrame)
+    currentStatus = "Moving top on tf %d...".format(timeFrame)
     var iterate = 0
     val consumed = tweetQueue.consumeByTimeFrame(timeFrame)
     logger.debug("consumed from tf=%d size=%d".format(timeFrame,consumed.size))
+
+    var trends = new ListBuffer[Trend]()
+    val newRecord = TrendRecord.createRecord
+    newRecord.timeFrame(timeFrame)
     for (message <- consumed) {
-      iterate = iterate + 1
-      if (iterate < top) {
-        trendQueue.add(timeFrame,message.name,message.tweets)
+      if (message.tweets.size > 0) {
+        val trend = Trend.createRecord
+        val tags = this.trendByTags(message.tweets)
+        val tweets = new ListBuffer[TweetObject]()
+        for (tweet <- message.tweets) {
+          tweets += TweetObject.createFromTweet(tweet)
+        }
+        trends += trend.name(message.name).tags(tags).tweets(tweets.toList)
       }
     }
+    newRecord.trends(trends.toList)
+    newRecord.save(WriteConcern.SAFE)
     lastTimeFrame = timeFrame
     currentStatus = "Idle"
   }

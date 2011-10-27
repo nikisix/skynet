@@ -34,7 +34,7 @@ class TweetMessageQueue extends Loggable {
       val notConsume = internalList.filter(m => !(m.timeFrame._1 <= timeFrame && timeFrame < m.timeFrame._2))
       internalList.clear()
       internalList.appendAll(notConsume)
-      return consume.sortBy(_.tweets.size)
+      return consume.sortBy(x => 0-(x.tweets.size))
     } finally {
       this.lock.unlock()
     }

@@ -4,20 +4,30 @@ import twitter4j.Tweet
 import java.util.concurrent.locks.ReentrantLock
 import java.util.concurrent.TimeUnit
 import net.liftweb.common.Loggable
-import collection.mutable.{ListBuffer}
+import collection.mutable.{HashMap, ListBuffer}
 
-case class TrendMessage(timeFrame: Int, name: String, tweets: List[Tweet])
+case class TrendMessage(name: String, tweets: List[Tweet], tags: Map[String, Int])
 
 class TrendMessageQueue extends Loggable {
   private val lock = new ReentrantLock
-  private val internalList = new ListBuffer[TrendMessage]()
+  private val mapper = new HashMap[Int, ListBuffer[TrendMessage]]()
 
-  def toMap = internalList.map(x => x.timeFrame.toString+"_"+x.name -> x.tweets.size).toMap
+  def toMap = mapper.map(x => x._1.toString -> x._2.map(y => y.name -> Map("tweets" -> y.tweets.size, "tags" -> y.tags)).toMap).toMap
 
-  def add(timeFrame: Int, name: String, tweets: List[Tweet]) = {
+  def add(timeFrame: Int, name: String, tweets: List[Tweet], tags: Map[String, Int]) = {
     this.lock.tryLock(100, TimeUnit.MILLISECONDS)
     try {
-      internalList += TrendMessage(timeFrame, name, tweets)
+      if (!mapper.contains(timeFrame)) {
+        val list = new ListBuffer[TrendMessage]()
+        val message = TrendMessage(name, tweets, tags)
+        list += message
+        mapper += timeFrame -> list
+      } else {
+        val list = mapper(timeFrame)
+        val message = TrendMessage(name, tweets, tags)
+        list += message
+        mapper(timeFrame) = list
+      }
     } finally {
       this.lock.unlock()
     }

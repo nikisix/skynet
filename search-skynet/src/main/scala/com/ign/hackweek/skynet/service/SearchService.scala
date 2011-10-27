@@ -24,15 +24,14 @@ object SearchService extends Loggable with Scheduler {
   private val lock = new ReentrantLock
   private var jobs = List[SearchJob]()
   private val tweetQueue: TweetMessageQueue = new TweetMessageQueue
-  private val trendQueue: TrendMessageQueue = new TrendMessageQueue
 
   def startJobs = {
     this.lock.tryLock(200, TimeUnit.MILLISECONDS)
     try {
       this._stopJobs
       this.jobs = List(
-                    new Tweetminator("Tweetminator",120,tweetQueue),
-                    new Trendminator("Trendminator",60,10,tweetQueue,trendQueue)
+                    new Tweetminator("Tweetminator",600,-10,tweetQueue),
+                    new Trendminator("Trendminator",200,-15,tweetQueue)
                   )
       this._startJobs
     } finally {
@@ -73,8 +72,7 @@ object SearchService extends Loggable with Scheduler {
     Map(
       "status" -> statusText,
       "jobs" -> jobStatuses,
-      "tweetQueue" -> this.tweetQueue.toMap,
-      "trendQueue" -> this.trendQueue.toMap
+      "tweetQueue" -> this.tweetQueue.toMap
     )
   }
 
