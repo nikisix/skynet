@@ -2,17 +2,13 @@ package com.ign.hackweek.skynet.service
 
 import java.util.concurrent.locks.ReentrantLock
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicInteger
 import net.liftweb.common.Loggable
-import twitter4j.QueryResult
 
 import com.ign.hackweek.skynet.scheduler._
-import com.ign.hackweek.skynet.utils.TwitterSearch
 import com.ign.hackweek.skynet.model.SearchFeed
-import com.ign.hackweek.skynet.jobs.{Tweetminator, TweetMessageQueue}
 import net.liftweb.json.{DefaultFormats, JsonAST}
-import com.ign.hackweek.skynet.record.SearchFeedRecord
 import com.mongodb.WriteConcern
+import com.ign.hackweek.skynet.jobs.{Trendminator, TrendMessageQueue, Tweetminator, TweetMessageQueue}
 
 abstract class SearchJob(name: String, seconds: Int) extends Job {
   def schedule = JobSchedule.repeat(this.seconds * 1000)
@@ -27,13 +23,17 @@ object SearchService extends Loggable with Scheduler {
 
   private val lock = new ReentrantLock
   private var jobs = List[SearchJob]()
-  private val messageQueue: TweetMessageQueue = new TweetMessageQueue
+  private val tweetQueue: TweetMessageQueue = new TweetMessageQueue
+  private val trendQueue: TrendMessageQueue = new TrendMessageQueue
 
   def startJobs = {
     this.lock.tryLock(200, TimeUnit.MILLISECONDS)
     try {
       this._stopJobs
-      this.jobs = List(new Tweetminator("Tweetminator",60,messageQueue))
+      this.jobs = List(
+                    new Tweetminator("Tweetminator",120,tweetQueue),
+                    new Trendminator("Trendminator",60,10,tweetQueue,trendQueue)
+                  )
       this._startJobs
     } finally {
       this.lock.unlock()
@@ -70,7 +70,12 @@ object SearchService extends Loggable with Scheduler {
     } finally {
       this.lock.unlock()
     }
-    Map("status" -> statusText, "jobs" -> jobStatuses, "tweets" -> this.messageQueue.toMap)
+    Map(
+      "status" -> statusText,
+      "jobs" -> jobStatuses,
+      "tweetQueue" -> this.tweetQueue.toMap,
+      "trendQueue" -> this.trendQueue.toMap
+    )
   }
 
   private def _startJobs = {

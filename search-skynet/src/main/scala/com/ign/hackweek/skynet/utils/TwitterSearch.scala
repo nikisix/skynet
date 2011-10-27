@@ -9,6 +9,7 @@ trait TwitterSearch {
       val twitter: Twitter = factory.getInstance
       val twQuery: Query = new Query(query)
       twQuery.setResultType("recent")
+      twQuery.setRpp(50)
       val result = twitter.search(twQuery)
       if (result != null && result.getTweets != null && result.getTweets.size > 0)
         return result

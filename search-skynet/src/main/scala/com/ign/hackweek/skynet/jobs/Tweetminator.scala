@@ -3,8 +3,7 @@ package com.ign.hackweek.skynet.jobs
 import com.ign.hackweek.skynet.service.SearchJob
 import com.ign.hackweek.skynet.utils.TwitterSearch
 import com.ign.hackweek.skynet.model.SearchFeed
-import java.text.SimpleDateFormat
-import java.util.{Date, Calendar}
+import java.util.Calendar
 import twitter4j.{Tweet, QueryResult}
 import net.liftweb.common.Loggable
 import collection.mutable.ListBuffer
@@ -28,8 +27,8 @@ class Tweetminator(name: String, seconds: Int, queue: TweetMessageQueue) extends
     for(t <- preTweets) {
       val tweet = t.asInstanceOf[Tweet]
       val created = ((tweet.getCreatedAt.getHours * 60) + tweet.getCreatedAt.getMinutes) * 60
-      logger.debug("Tweet: " + created.toString + " / " + timeFrame.toString + " v " + (timeFrame+seconds).toString)
-      if (created >= timeFrame && created < timeFrame+seconds) {
+      if (timeFrame <= created && created < timeFrame+seconds) {
+        logger.debug("Tweet %d <= %d < %d".format(timeFrame,created,timeFrame+seconds))
         tweets += tweet
       }
     }
@@ -48,7 +47,7 @@ class Tweetminator(name: String, seconds: Int, queue: TweetMessageQueue) extends
       val preTweets = search(feed.query)
       if (preTweets != null) {
         val listValue = this.drop(timeFrame, preTweets)
-        queue.add(feed.name, (timeFrame, seconds), listValue)
+        queue.add(feed.name, (timeFrame, timeFrame+seconds), listValue)
       }
     }
     currentStatus = "Idle"
