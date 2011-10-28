@@ -12,6 +12,8 @@ object TrendsResource extends RestHelper {
 
     case "stop" :: Nil JsonGet _ => Extraction.decompose( TrendsService.stopJobs )
 
+    case "trendsByTag" :: since :: Nil JsonGet _ => Extraction.decompose( TrendsService.getTrendsByTag(since.toLong) )
+
     case "status" :: Nil JsonGet _ => Extraction.decompose( TrendsService.status )
 
   })

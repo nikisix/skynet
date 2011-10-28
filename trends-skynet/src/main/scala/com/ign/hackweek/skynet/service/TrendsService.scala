@@ -48,6 +48,15 @@ object TrendsService extends Loggable with Scheduler {
     this.status
   }
 
+  def getTrendsByTag(sinceTimeFrame: Long) = {
+    val trends = stream.getTrendsByTag(sinceTimeFrame)
+    trends.map(x => Map(
+      "timeFrame" -> x.name.value,
+      "totalTags" -> x.tags.value.size,
+      "tags" -> x.tags.value.map(y => Map("tag" -> y.name.value, "count" -> y.count.value))
+    ))
+  }
+
   def status = {
     var jobStatuses: List[Map[String, Any]] = Nil
     var statusText = "Stopped"
@@ -61,8 +70,7 @@ object TrendsService extends Loggable with Scheduler {
     }
     Map(
       "status" -> statusText,
-      "jobs" -> jobStatuses,
-      "statStream" -> stream.toMap
+      "jobs" -> jobStatuses
     )
   }
 

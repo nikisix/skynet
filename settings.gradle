@@ -1,2 +1,3 @@
 include 'search-skynet'
 include 'search-skynet'
+include 'trends-skynet'
