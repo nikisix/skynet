@@ -7,14 +7,14 @@ import http._
 import com.ign.hackweek.skynet.service._
 
 import com.mongodb.ServerAddress
-import com.ign.hackweek.skynet.resource.SearchResource
+import com.ign.hackweek.skynet.resource.TrendsResource
 
 class Boot {
   def boot {
     LiftRules.addToPackages("com.ign.hackweek.skynet.service")
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
-    LiftRules.dispatch.append(SearchResource)
-    LiftRules.statelessDispatchTable.append(SearchResource)
+    LiftRules.dispatch.append(TrendsResource)
+    LiftRules.statelessDispatchTable.append(TrendsResource)
     MongoDB.defineDb( DefaultMongoIdentifier,
         MongoAddress( MongoHost( "sfdacovarrubias.hq.ign.com", 27017), "skynet") )
   }

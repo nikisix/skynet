@@ -63,8 +63,10 @@ class Trendminator(name: String, seconds: Int, delay: Int, tweetQueue: TweetMess
         trends += trend.name(message.name).tags(tags).tweets(tweets.toList)
       }
     }
-    newRecord.trends(trends.toList)
-    newRecord.save(WriteConcern.SAFE)
+    if (trends.size > 0) {
+      newRecord.trends(trends.toList)
+      newRecord.save(WriteConcern.SAFE)
+    }
     lastTimeFrame = timeFrame
     currentStatus = "Idle"
   }

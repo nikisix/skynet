@@ -1,0 +1,26 @@
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+description = "Trends Skynet"
+
+// Jetty Plugin
+httpPort = 8080
+
+jettyRun {
+    //httpPort = 8080
+    scanTargets = (fileTree("src/main/").include("webapp/WEB-INF/**") + fileTree(compileJava.destinationDir)).files
+    reload = 'manual'
+    //reload = 'automatic'
+}
+
+dependencies {
+
+    compile "org.twitter4j:twitter4j-core:2.2.5"
+    compile "org.twitter4j:twitter4j-stream:2.2.5"
+    compile "org.twitter4j:twitter4j-async:2.2.5"
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile libraries.liftweb
+    compile libraries.liftTools
+
+}
+
