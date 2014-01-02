@@ -16,6 +16,6 @@ class Boot {
     LiftRules.dispatch.append(SearchResource)
     LiftRules.statelessDispatchTable.append(SearchResource)
     MongoDB.defineDb( DefaultMongoIdentifier,
-        MongoAddress( MongoHost( "sfdacovarrubias.hq.ign.com", 27017), "skynet") )
+        MongoAddress( MongoHost( "127.0.0.1", 27017), "skynet") )
   }
 }

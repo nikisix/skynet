@@ -15,8 +15,8 @@ trait Statistics {
   def StdDev(samples: List[Double]): Double = {
     val mean = Mean(samples)
     var sum = 0.0
-    samples.foreach(x => sum += Math.pow(x-mean,2.0) )
-    Math.sqrt(sum / samples.size)
+    samples.foreach(x => sum += scala.math.pow(x-mean,2.0) )
+    scala.math.sqrt(sum / samples.size)
   }
 
 }

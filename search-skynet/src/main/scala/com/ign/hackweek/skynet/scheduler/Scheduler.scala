@@ -66,7 +66,7 @@ trait Scheduler {
       if (queue.isEmpty)
         None
       else {
-        val max = queue.max
+        val max = queue.head
         Some((max.handle, max.nextRun))
       }
     }
@@ -92,7 +92,7 @@ trait Scheduler {
       }
       else {
         val currentTime = clock.now
-        val nextRunTime = queue.max.nextRun
+        val nextRunTime = queue.head.nextRun
         if (nextRunTime > currentTime) {
           Some(nextRunTime - currentTime)
         }
