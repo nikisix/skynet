@@ -23,6 +23,7 @@ libraries = [
         jcip: 'net.jcip:jcip-annotations:1.0',
         junit: 'junit:junit:4.8.2',
         xmlunit: 'xmlunit:xmlunit:1.3',
+        twitter4j: 'org.twitter4j:twitter4j-core:3.0.5',
 ]
 
 // Specs
@@ -144,6 +145,7 @@ subprojects {
         compile libraries.jcip
         compile libraries.guava
         compile libraries.perf
+        compile libraries.twitter4j
 
         scalaTools libraries.scalaTools
 

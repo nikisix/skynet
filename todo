@@ -1,0 +1,2 @@
+update to twitter 1.1 api as 1.0 is now offline
+    -GET search  now requires oauth :(
