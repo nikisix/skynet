@@ -1,5 +1,6 @@
 package bootstrap.liftweb
 
+
 import net.liftweb._
 import mongodb._
 import util._

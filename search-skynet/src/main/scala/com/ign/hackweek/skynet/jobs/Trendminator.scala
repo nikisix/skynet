@@ -4,7 +4,7 @@ import com.ign.hackweek.skynet.service.SearchJob
 import com.ign.hackweek.skynet.utils.TwitterSearch
 import java.util.Calendar
 import net.liftweb.common.Loggable
-import twitter4j.{HashtagEntity, Tweet}
+import twitter4j.{HashtagEntity, Status}
 import collection.mutable.{HashMap,ListBuffer}
 
 import com.mongodb.WriteConcern
@@ -23,7 +23,7 @@ class Trendminator(name: String, seconds: Int, delay: Int, tweetQueue: TweetMess
     parentStatus
   }
 
-  def trendByTags(tweets: List[Tweet]): List[TweetTag] = {
+  def trendByTags(tweets: List[Status]): List[TweetTag] = {
     var tags = new HashMap[String, Int]()
     tweets.foreach(_.getHashtagEntities.foreach(tag => {
       val tagText = tag.getText.toLowerCase

@@ -4,7 +4,7 @@ import com.ign.hackweek.skynet.service.SearchJob
 import com.ign.hackweek.skynet.utils.TwitterSearch
 import com.ign.hackweek.skynet.model.SearchFeed
 import java.util.Calendar
-import twitter4j.{Tweet, QueryResult}
+import twitter4j.{Status, QueryResult}
 import net.liftweb.common.Loggable
 import collection.mutable.ListBuffer
 
@@ -21,11 +21,11 @@ class Tweetminator(name: String, seconds: Int, delay:Int, queue: TweetMessageQue
     parentStatus
   }
 
-  def drop(timeFrame: Int, result: QueryResult): List[Tweet] = {
-    val tweets = new ListBuffer[Tweet]()
+  def drop(timeFrame: Int, result: QueryResult): List[Status] = {
+    val tweets = new ListBuffer[Status]()
     val preTweets = result.getTweets.toArray
     for(t <- preTweets) {
-      val tweet = t.asInstanceOf[Tweet]
+      val tweet = t.asInstanceOf[Status]
       val created = ((tweet.getCreatedAt.getHours * 60) + tweet.getCreatedAt.getMinutes) * 60
       if (timeFrame <= created && created < timeFrame+seconds) {
         logger.debug("Tweet %d <= %d < %d".format(timeFrame,created,timeFrame+seconds))

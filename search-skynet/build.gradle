@@ -3,6 +3,12 @@ apply plugin: 'jetty'
 
 description = "Search Skynet"
 
+/** project variables  */
+def scalaVersion = "2.10.3"
+def liftVersion = '2.5.1'
+def mongoVersion = '2.9.3'
+def twitter4jVersion = '3.0.5'
+
 // Jetty Plugin
 httpPort = 8080
 
@@ -14,13 +20,24 @@ jettyRun {
 }
 
 dependencies {
-
-    compile "org.twitter4j:twitter4j-core:2.2.5"
-    compile "org.twitter4j:twitter4j-stream:2.2.5"
-    compile "org.twitter4j:twitter4j-async:2.2.5"
+    compile 'org.scala-lang:scala-compiler:2.10.3'
+    compile 'org.scala-lang:scala-library:2.10.3'
+    compile 'org.twitter4j:twitter4j-core:$twitter4jVersion'
+    compile 'org.twitter4j:twitter4j-core:3.0.5'
+    compile 'org.twitter4j:twitter4j-stream:$twitter4jVersion'
+    compile 'org.twitter4j:twitter4j-async:$twitter4jVersion'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-    compile libraries.liftweb
-    compile libraries.liftTools
 
+//    compile libraries.liftweb
+//    compile libraries.liftTools
+    compile    'net.liftweb:lift-webkit_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-mapper_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-json_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-util_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-common_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-mongodb_$scalaVersion:$liftVersion'
+    compile    'net.liftweb:lift-mongodb-record_$scalaVersion:$liftVersion'
+    compile    'org.mongodb:mongo-java-driver:$mongoVersion'
+    compile    'com.foursquare:rogue-core_2.10:3.0.0-beta1'
+    compile    'com.foursquare:rogue-lift_2.10:3.0.0-beta1'
 }
-
